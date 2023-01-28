@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b5b12060f816a49ad6086d8227328c, type: 3}
+  m_Name: Test_0
+  m_EditorClassIdentifier: 
+  dialogues:
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 106
+        y: 232
+        width: 206
+        height: 193
+      nodeColor: {r: 0.764151, g: 0.27033645, b: 0.27033645, a: 1}
+    id: 
+    title: Title
+    actor: Actor
+    content:
+      showExContent: 0
+      enable: 0
+      conditions: []
+      content: Content
+      events: []
+    choices:
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice123
+      events: []
+      nextDialogueID: 
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice
+      events: []
+      nextDialogueID: 
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 289
+        y: 16
+        width: 206
+        height: 172
+      nodeColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    id: 
+    title: Title
+    actor: Actor
+    content:
+      showExContent: 0
+      enable: 0
+      conditions: []
+      content: Content
+      events: []
+    choices:
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice
+      events: []
+      nextDialogueID: 
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 750
+        y: 425
+        width: 206
+        height: 172
+      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
+    id: 
+    title: Title
+    actor: Actor
+    content:
+      showExContent: 0
+      enable: 0
+      conditions: []
+      content: Content
+      events: []
+    choices:
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice
+      events: []
+      nextDialogueID: 
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 1113
+        y: 60
+        width: 206
+        height: 172
+      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
+    id: 
+    title: Title
+    actor: Actor
+    content:
+      showExContent: 0
+      enable: 0
+      conditions: []
+      content: Content
+      events: []
+    choices:
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice
+      events: []
+      nextDialogueID: 
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 694
+        y: -112
+        width: 206
+        height: 172
+      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
+    id: 
+    title: Title
+    actor: Actor
+    content:
+      showExContent: 0
+      enable: 0
+      conditions: []
+      content: Content
+      events: []
+    choices:
+    - showExContent: 0
+      enable: 0
+      status: 0
+      conditions: []
+      content: Choice
+      events: []
+      nextDialogueID: 
