@@ -16,132 +16,261 @@ MonoBehaviour:
   - nodeInfo:
       nodePos:
         serializedVersion: 2
-        x: 106
-        y: 232
-        width: 206
-        height: 193
-      nodeColor: {r: 0.764151, g: 0.27033645, b: 0.27033645, a: 1}
-    id: 
-    title: Title
+        x: 189
+        y: 247
+        width: 260
+        height: 388
+    dialogueType: 0
+    id: EhrNdophwuYxtbpSvglI
+    title: "\u5F00\u59CB 1 - 1"
     actor: Actor
     content:
-      showExContent: 0
       enable: 0
-      conditions: []
       content: Content
+    outputs:
+    - status: 0
+      conditions:
+      - itemName: "\u6C38\u8FDC\u8FBE\u6210\u6761\u4EF6"
+        parameters:
+        - parameterType: 0
+          nameString: "\u6574\u6570"
+          valueInt: 213
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 1
+          nameString: valueFloat
+          valueInt: 0
+          valueFloat: 555.111
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 2
+          nameString: valueString
+          valueInt: 0
+          valueFloat: 0
+          valueString: "\u5B57\u7B26\u4E32"
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 3
+          nameString: "\u5E03\u5C14"
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 1
+          valueObject: {fileID: 0}
+        - parameterType: 4
+          nameString: valueObject
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 11400000, guid: 2bb857ba7def088459a325febc786651,
+            type: 2}
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      content: Choice 1
       events: []
-    choices:
-    - showExContent: 0
-      enable: 0
-      status: 0
+      nextDialogueID: mHPZnufAifAHEINtohQV
+    - status: 0
       conditions: []
-      content: Choice123
+      content: Choice 2
+      events: []
+      nextDialogueID: FTktWFaqedDgpBrVXAGS
+    - status: 0
+      conditions: []
+      content: Output
       events: []
       nextDialogueID: 
-    - showExContent: 0
-      enable: 0
-      status: 0
+    - status: 0
       conditions: []
-      content: Choice
+      content: Output
       events: []
       nextDialogueID: 
-  - nodeInfo:
-      nodePos:
-        serializedVersion: 2
-        x: 289
-        y: 16
-        width: 206
-        height: 172
-      nodeColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    id: 
-    title: Title
-    actor: Actor
-    content:
-      showExContent: 0
-      enable: 0
+    - status: 0
       conditions: []
-      content: Content
-      events: []
-    choices:
-    - showExContent: 0
-      enable: 0
-      status: 0
-      conditions: []
-      content: Choice
-      events: []
-      nextDialogueID: 
-  - nodeInfo:
-      nodePos:
-        serializedVersion: 2
-        x: 750
-        y: 425
-        width: 206
-        height: 172
-      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
-    id: 
-    title: Title
-    actor: Actor
-    content:
-      showExContent: 0
-      enable: 0
-      conditions: []
-      content: Content
-      events: []
-    choices:
-    - showExContent: 0
-      enable: 0
-      status: 0
-      conditions: []
-      content: Choice
-      events: []
-      nextDialogueID: 
-  - nodeInfo:
-      nodePos:
-        serializedVersion: 2
-        x: 1113
-        y: 60
-        width: 206
-        height: 172
-      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
-    id: 
-    title: Title
-    actor: Actor
-    content:
-      showExContent: 0
-      enable: 0
-      conditions: []
-      content: Content
-      events: []
-    choices:
-    - showExContent: 0
-      enable: 0
-      status: 0
-      conditions: []
-      content: Choice
+      content: Output
       events: []
       nextDialogueID: 
   - nodeInfo:
       nodePos:
         serializedVersion: 2
-        x: 694
-        y: -112
-        width: 206
-        height: 172
-      nodeColor: {r: 0.23529412, g: 0.3529412, b: 0.43137255, a: 1}
-    id: 
-    title: Title
+        x: 542
+        y: 138
+        width: 260
+        height: 183
+    dialogueType: 1
+    id: mHPZnufAifAHEINtohQV
+    title: StraightmHPZnufAifAHEI
     actor: Actor
     content:
-      showExContent: 0
       enable: 0
+      content: Content123
+    outputs:
+    - status: 0
       conditions: []
-      content: Content
+      content: Output
       events: []
-    choices:
-    - showExContent: 0
+      nextDialogueID: hebFgiODNwpCGXmTeWhk
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 540
+        y: 410
+        width: 260
+        height: 144
+    dialogueType: 2
+    id: FTktWFaqedDgpBrVXAGS
+    title: Branch
+    actor: Actor
+    content:
       enable: 0
-      status: 0
+      content: Content
+    outputs:
+    - status: 0
+      conditions:
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      content: Output
+      events: []
+      nextDialogueID: hebFgiODNwpCGXmTeWhk
+    - status: 0
+      conditions:
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: '*Condition*'
+        parameters: []
+      - itemName: "\u6C38\u8FDC\u8FBE\u6210\u6761\u4EF6"
+        parameters:
+        - parameterType: 0
+          nameString: "\u6574\u6570"
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 1
+          nameString: valueFloat
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 2
+          nameString: valueString
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 3
+          nameString: "\u5E03\u5C14"
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 4
+          nameString: valueObject
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+      content: Output
+      events: []
+      nextDialogueID: qXcrXeUoOeimcynaRShY
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 919
+        y: 376
+        width: 260
+        height: 183
+    dialogueType: 3
+    id: hebFgiODNwpCGXmTeWhk
+    title: Events
+    actor: Actor
+    content:
+      enable: 0
+      content: Content
+    outputs:
+    - status: 0
       conditions: []
-      content: Choice
+      content: Output
+      events:
+      - itemName: "\u6C38\u8FDC\u8FBE\u6210\u6761\u4EF6"
+        parameters:
+        - parameterType: 0
+          nameString: "\u6574\u6570"
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 1
+          nameString: valueFloat
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 2
+          nameString: valueString
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 3
+          nameString: "\u5E03\u5C14"
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+        - parameterType: 4
+          nameString: valueObject
+          valueInt: 0
+          valueFloat: 0
+          valueString: 
+          valueBool: 0
+          valueObject: {fileID: 0}
+      - itemName: '*Event*'
+        parameters: []
+      - itemName: '*Event*'
+        parameters: []
+      nextDialogueID: 
+  - nodeInfo:
+      nodePos:
+        serializedVersion: 2
+        x: 914
+        y: 608
+        width: 260
+        height: 224
+    dialogueType: 0
+    id: qXcrXeUoOeimcynaRShY
+    title: Normal
+    actor: Actor
+    content:
+      enable: 0
+      content: Content
+    outputs:
+    - status: 0
+      conditions: []
+      content: Output
       events: []
       nextDialogueID: 

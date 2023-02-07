@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
-public abstract class EDS_DialogueEvent
+public abstract class EDS_DialogueEvent : UnityEngine.Object
 {
     public abstract object Execute();
 
-    public static Dictionary<string, Type> eventInfos
-         = new()
-         {
-             ["ÎÞ"] = null,
-         };
+    public static Dictionary<string, Type> eventInfos = new()
+    {
+        ["æ— "] = null,
+    };
 
     public static List<string> GetAllKeys()
     {

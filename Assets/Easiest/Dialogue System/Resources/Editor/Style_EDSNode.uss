@@ -1,138 +1,25 @@
-.EDS-Node-Title-Contianer
+.EDS_Node
 {
-	width: 100%;
+    max-width: 300px;
 }
 
-.EDS-Node-Title-Contianer > #EDS_TitleLabel
+.EDS_Node #extension
 {
-	width: 60%;
-	overflow: hidden;
-	font-size: 12px;
-	-unity-text-align: middle-left;
-	-unity-font-style: bold;
+    max-height: 120px;
 }
 
-#EDS_TitleColorField
+.EDS_Port > #type
 {
-	width: 40px;
+    /* margin: 0px;
+    padding: 0px;
+    width: 0px;
+    height: 0px; */
+    margin: 10px;
+    -unity-text-align: middle-right;
+    font-size: 15px;
 }
 
-#EDS_TitleColorField > #unity-internal-color-field
+#EDS_TextField #unity-text-input
 {
-	align-self: center;
-	border-top-color: rgba(0, 0, 0, 0.5);
-	border-top-width: 1px;
-	border-bottom-color: rgba(0, 0, 0, 0.5);
-	border-bottom-width: 1px;
-	border-left-color: rgba(0, 0, 0, 0.5);
-	border-left-width: 1px;
-	border-right-color: rgba(0, 0, 0, 0.5);
-	border-right-width: 1px;
-}
-
-.EDS-Node-Sub-Container
-{
-	background-color: rgba(50, 50, 50, 1);
-	width: 100%;
-}
-
-.EDS-Node-Content-Container
-{
-	background-color: rgba(50, 50, 50, 1);
-	flex-direction: column;
-	width: 200px;
-	height: auto;
-	min-height: 50px;
-	max-height: 100px;
-}
-
-.EDS-Node-Choices-Container
-{
-	background-color: rgba(40, 40, 40, 1);
-	flex-direction: column;
-	min-height: 48px;
-	padding-top: 8px;
-	border-top-color: rgba(0, 0, 0, 0.2);
-	border-top-width: 1px;
-}
-
-.EDS-Node-Button-Container
-{
-	flex-direction: row;
-	background-color: rgba(40, 40, 40, 1);
-	width: 100%;
-	height: 30px;
-}
-
-.EDS-Node-Content-Container > #EDS_Actor
-{
-	padding-top: 8px;
-	padding-bottom: 4px;
-	padding-left: 5%;
-	-unity-font-style: bold;
-}
-
-.EDS-Node-Content-Container #EDS_Content
-{
-	padding-left: 5%;
-	width: 100%;
-	white-space: normal;
-}
-
-.EDS-Node-Content-Container #EDS_ContentScrollView
-{
-	width: 100%;
-}
-
-#EDS_InputPort
-{
-	height: 100%;
-	padding-right: 0px;
-}
-
-#EDS_InputPort > #type
-{
-	margin: 0px;
-}
-
-#EDS_OutputPort
-{
-	width: 100%;
-	height: 30px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	background-color: rgba(0, 0, 0, 0.15);
-	border-top-color: rgba(0, 0, 0, 0.2);
-	border-top-width: 1px;
-	border-bottom-color: rgba(0, 0, 0, 0.2);
-	border-bottom-width: 1px;
-}
-
-#EDS_OutputPort > #type
-{
-	overflow: hidden;
-	-unity-text-align: middle-left;
-	width: 80%;
-}
-
-#EDS_OutputPort > #connector
-{
-	margin-right: 8px;
-}
-
-#EDS_Button
-{
-	flex-grow: 1;
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	padding-right: 0;
-}
-
-#EDS_Button > #EDS_ButtonLabel
-{
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
-	-unity-text-align: middle-center;
+    
 }
