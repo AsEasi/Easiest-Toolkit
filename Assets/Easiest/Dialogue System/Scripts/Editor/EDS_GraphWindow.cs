@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -355,7 +356,12 @@ namespace Easiest.DialogueSystem
             string _path = EditorUtility.SaveFilePanelInProject("Select save floder", "DialogueHolder", "asset", "Msg");
 
             // Create
-            AssetDatabase.CreateAsset(CreateInstance<EDS_DialogueHolder>(), _path);
+            var _newInstance = CreateInstance<EDS_DialogueHolder>();
+
+            AssetDatabase.CreateAsset(_newInstance, _path);
+
+            // Set to current
+            CurrentDialogueHolder = _newInstance;
         }
         #endregion
     }
@@ -476,12 +482,12 @@ namespace Easiest.DialogueSystem
 
         private void AddNodes()
         {
-            if (ParentWindow.CurrentDialogueHolder != null &&
-                ParentWindow.CurrentDialogueHolder.dialogues.Count > 0)
+            if (EDS_GraphWindow.Current.CurrentDialogueHolder != null &&
+                EDS_GraphWindow.Current.CurrentDialogueHolder.dialogues.Count > 0)
             {
-                for (int i = 0; i < ParentWindow.CurrentDialogueHolder.dialogues.Count; i++)
+                for (int i = 0; i < EDS_GraphWindow.Current.CurrentDialogueHolder.dialogues.Count; i++)
                 {
-                    EDS_Node _node = new EDS_Node(ParentWindow.CurrentDialogueHolder.dialogues[i], ParentWindow);
+                    EDS_Node _node = new EDS_Node(EDS_GraphWindow.Current.CurrentDialogueHolder.dialogues[i], EDS_GraphWindow.Current);
 
                     _node.ElementRect = _node.Dialogue.nodeInfo.nodePos;
 
@@ -1038,13 +1044,29 @@ namespace Easiest.DialogueSystem
             _contentRect.width -= 16;
             _contentRect.height -= 16;
 
-            GUILayout.BeginArea(_contentRect);
-            contentScrollPos = GUILayout.BeginScrollView(contentScrollPos, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+            if (!Dialogue.hasContent)
+            {
+                EditorGUI.LabelField(_contentRect, "Content Disabled");
+            }
+            else
+            {
+                GUILayout.BeginArea(_contentRect);
+                contentScrollPos = GUILayout.BeginScrollView(contentScrollPos, GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(true));
 
-            GUILayout.Label(Dialogue.content.content, EditorStyles.wordWrappedLabel);
+                if (Dialogue.usePreviousActor)
+                {
+                    EditorGUI.LabelField(EditorGUILayout.GetControlRect(GUILayout.Height(20)), "*Previous Actor*");
+                }
+                else
+                {
+                    EditorGUI.LabelField(EditorGUILayout.GetControlRect(GUILayout.Height(20)), $"{Dialogue.actor}:");
+                }
 
-            GUILayout.EndScrollView();
-            GUILayout.EndArea();
+                GUILayout.Label(Dialogue.content.content, EditorStyles.wordWrappedLabel);
+
+                GUILayout.EndScrollView();
+                GUILayout.EndArea();
+            }
 
             // : Outputs
 
@@ -1114,13 +1136,28 @@ namespace Easiest.DialogueSystem
             _contentRect.width -= 16;
             _contentRect.height -= 16;
 
-            GUILayout.BeginArea(_contentRect);
-            contentScrollPos = GUILayout.BeginScrollView(contentScrollPos, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+            if (!Dialogue.hasContent)
+            {
+                EditorGUI.LabelField(_contentRect, "Content Disabled");
+            }
+            else
+            {
+                GUILayout.BeginArea(_contentRect);
+                contentScrollPos = GUILayout.BeginScrollView(contentScrollPos, GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(true));
+                
+                if (Dialogue.usePreviousActor)
+                {
+                    EditorGUI.LabelField(EditorGUILayout.GetControlRect(GUILayout.Height(20)), "*Previous Actor*");
+                }
+                else
+                {
+                    EditorGUI.LabelField(EditorGUILayout.GetControlRect(GUILayout.Height(20)), $"{Dialogue.actor}:");
+                }
+                GUILayout.Label(Dialogue.content.content, EditorStyles.wordWrappedLabel);
 
-            GUILayout.Label(Dialogue.content.content, EditorStyles.wordWrappedLabel);
-
-            GUILayout.EndScrollView();
-            GUILayout.EndArea();
+                GUILayout.EndScrollView();
+                GUILayout.EndArea();
+            }
         }
 
         private void DrawNode_Branch()
@@ -1161,7 +1198,23 @@ namespace Easiest.DialogueSystem
 
                 Rect _rectA = EditorGUILayout.GetControlRect(GUILayout.Width(_rect.width - (32 + 8)), GUILayout.Height(singleOutputHeight - 1));
 
-                GUI.Label(_rectA, Dialogue.outputs[i].content);
+                StringBuilder _labelContent = new StringBuilder();
+
+                var _conditions = Dialogue.outputs[i].conditions;
+
+                if (_conditions.Count > 0)
+                {
+                    for (int c = 0; c < _conditions.Count; c++)
+                    {
+                        _labelContent.Append(_conditions[c].itemName);
+                    }
+                }
+                else
+                {
+                    _labelContent.Append("Empty");
+                }
+
+                GUI.Label(_rectA, _labelContent.ToString());
 
                 GUILayout.EndHorizontal();
                 GUILayout.EndArea();
@@ -1433,7 +1486,7 @@ namespace Easiest.DialogueSystem
         {
             base.OnGUI();
 
-            ParentWindow.CurrentDialogueHolder = (EDS_DialogueHolder)EditorGUILayout.ObjectField("Dialogue Holder", ParentWindow.CurrentDialogueHolder, typeof(EDS_DialogueHolder), false);
+            EDS_GraphWindow.Current.CurrentDialogueHolder = (EDS_DialogueHolder)EditorGUILayout.ObjectField("Dialogue Holder", ParentWindow.CurrentDialogueHolder, typeof(EDS_DialogueHolder), false);
 
             if (GUILayout.Button("New")) { ParentWindow.CreateNewDialogueHolder(); }
         }

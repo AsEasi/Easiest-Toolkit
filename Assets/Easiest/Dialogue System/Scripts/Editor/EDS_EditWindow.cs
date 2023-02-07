@@ -36,6 +36,7 @@ namespace Easiest.DialogueSystem
             } 
         }
         private Vector2 scrollPos;
+        private Vector2 contentScrollPos;
 
         // Lists
         public EDS_OutputList OutputList { get; protected set; }
@@ -48,7 +49,7 @@ namespace Easiest.DialogueSystem
         {
             if (Dialogue == null) EditorGUILayout.HelpBox("Select a dialogue to Edit", MessageType.Warning, true);
             
-            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandHeight(true));
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(false));
 
             DrawIDInfo();
             DrawTitle();
@@ -87,11 +88,25 @@ namespace Easiest.DialogueSystem
 
             EDS_EditorUtility.DrawBigLabel("Content");
 
-            EditorGUILayout.LabelField("Actor");
+            Dialogue.hasContent = EditorGUILayout.ToggleLeft("Has content", Dialogue.hasContent);
+            GUI.enabled = Dialogue.hasContent;
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Actor", GUILayout.Width(100));
+            Dialogue.usePreviousActor = EditorGUILayout.ToggleLeft("Use previous", Dialogue.usePreviousActor);
+            EditorGUILayout.EndHorizontal();
+
+            GUI.enabled = Dialogue.hasContent && !Dialogue.usePreviousActor;
             Dialogue.actor = EditorGUILayout.TextField(Dialogue.actor);
+            GUI.enabled = Dialogue.hasContent;
 
             EditorGUILayout.LabelField("Content");
-            Dialogue.content.content = EditorGUILayout.TextArea(Dialogue.content.content, GUILayout.MinHeight(40));
+
+            contentScrollPos = EditorGUILayout.BeginScrollView(contentScrollPos, GUILayout.Height(120), GUILayout.ExpandWidth(false));
+            Dialogue.content.content = EditorGUILayout.TextArea(Dialogue.content.content, EDS_GUIStyleProvider.WordWrapMultilineTextArea(), GUILayout.ExpandHeight(true));
+            EditorGUILayout.EndScrollView();
+
+            GUI.enabled = true;
         }
         private void DrawOutputs()
         {
@@ -199,17 +214,17 @@ namespace Easiest.DialogueSystem
         public IList ExtraContents { get; protected set; }
 
         public EDS_ExtraContentList ExtraContentROList { get; protected set; }
-        public Type ContentType { get; protected set; }
+        public Enum_ExtraContentType ContentType { get; protected set; }
 
         private Vector2 scrollPos;
 
-        public static EDS_ExtraContentEditWindow OpenWindow(IList _list, Type _contentType)
+        public static EDS_ExtraContentEditWindow OpenWindow(IList _list, Type _listItemType, Enum_ExtraContentType _contentType)
         {
             EDS_ExtraContentEditWindow _window = GetWindow<EDS_ExtraContentEditWindow>("Extra");
             _window.minSize = new Vector2(100, 100);
             _window.ExtraContents = _list;
             _window.ContentType = _contentType;
-            _window.SetupList();
+            _window.SetupList(_listItemType);
             return _window;
         }
 
@@ -234,9 +249,9 @@ namespace Easiest.DialogueSystem
             EditorGUILayout.EndScrollView();
         }
 
-        private void SetupList()
+        private void SetupList(Type _listItemType)
         {
-            ExtraContentROList = new EDS_ExtraContentList(ExtraContents, ContentType);
+            ExtraContentROList = new EDS_ExtraContentList(ExtraContents, _listItemType, ContentType);
         }
 
         private void DrawContentSettings(EDS_DialogueHolder.DialogueExtraContent _extraContent)
@@ -307,7 +322,7 @@ namespace Easiest.DialogueSystem
 
             scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.ExpandHeight(true));
 
-            Text = EditorGUILayout.TextArea(Text, GUILayout.ExpandHeight(true));
+            Text = EditorGUILayout.TextArea(Text, EDS_GUIStyleProvider.WordWrapMultilineTextArea(), GUILayout.ExpandHeight(true));
 
             GUILayout.EndScrollView();
 
@@ -377,7 +392,7 @@ namespace Easiest.DialogueSystem
                 Rect _rectA = new Rect(_elementRect.x, _elementRect.y, _buttonWidth, _buttonHeight);
                 if (GUI.Button(_rectA, "C"))
                 {
-                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].conditions, typeof(EDS_DialogueHolder.DialogueCondition));
+                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].conditions, typeof(EDS_DialogueHolder.DialogueCondition), Enum_ExtraContentType.Condition);
                 }
 
                 Rect _rectB = new Rect(_elementRect.x, _elementRect.y + _buttonHeight, _buttonWidth, _buttonHeight);
@@ -460,7 +475,7 @@ namespace Easiest.DialogueSystem
 
                 if (GUI.Button(_rectA, "Edit"))
                 {
-                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].conditions, typeof(EDS_DialogueHolder.DialogueCondition));
+                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].conditions, typeof(EDS_DialogueHolder.DialogueCondition), Enum_ExtraContentType.Condition);
                 }
 
                 Rect _rectB = new Rect(_elementRect.x + _buttonWidth + 4, _elementRect.y, _infoContainerWidth, _singleLineHeight);
@@ -523,7 +538,7 @@ namespace Easiest.DialogueSystem
 
                 if (GUI.Button(_rectA, "Edit"))
                 {
-                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].events, typeof(EDS_DialogueHolder.DialogueEvent));
+                    EDS_ExtraContentEditWindow.OpenWindow(Outputs[index].events, typeof(EDS_DialogueHolder.DialogueEvent), Enum_ExtraContentType.Event);
                 }
 
                 Rect _rectB = new Rect(_elementRect.x + _buttonWidth + 4, _elementRect.y, _infoContainerWidth, _singleLineHeight);
@@ -606,16 +621,16 @@ namespace Easiest.DialogueSystem
     public class EDS_ExtraContentList : ReorderableList
     {
         public IList ExtraContents { get; }
-        public Type ContentType { get; }
+        public Enum_ExtraContentType ContentType { get; }
 
-        public EDS_ExtraContentList(IList elements, Type elementType) : base(elements, elementType)
+        public EDS_ExtraContentList(IList elements, Type _type, Enum_ExtraContentType _exType) : base(elements, _type)
         {
             ExtraContents = elements;
-            ContentType = elementType;
-            Setup(ContentType);
+            ContentType = _exType;
+            Setup();
         }
 
-        private void Setup(Type _type)
+        private void Setup()
         {
             headerHeight = 0;
             multiSelect = false;
@@ -627,8 +642,8 @@ namespace Easiest.DialogueSystem
 
                 EDS_DialogueHolder.DialogueExtraContent _item;
 
-                if (ContentType == typeof(EDS_DialogueHolder.DialogueCondition)) _item = (EDS_DialogueHolder.DialogueCondition)ExtraContents[index];
-                else if (ContentType == typeof(EDS_DialogueHolder.DialogueEvent)) _item = (EDS_DialogueHolder.DialogueEvent)ExtraContents[index];
+                if (ContentType == Enum_ExtraContentType.Condition) _item = (EDS_DialogueHolder.DialogueCondition)ExtraContents[index];
+                else if (ContentType == Enum_ExtraContentType.Event) _item = (EDS_DialogueHolder.DialogueEvent)ExtraContents[index];
                 else
                 {
                     Debug.LogError("Invalid type");
@@ -655,10 +670,11 @@ namespace Easiest.DialogueSystem
                 if (GUI.Button(_rectB, "Search"))
                 {
                     EDS_DropDown _dropDown = new EDS_DropDown(
-                        new AdvancedDropdownState(), EDS_DropDown.DropDownType.Condition,
+                        new AdvancedDropdownState(), ContentType == Enum_ExtraContentType.Condition ? EDS_DropDown.DropDownType.Condition : EDS_DropDown.DropDownType.Evnet,
                         (selectName) => 
                         {
-                            if (EDS_DialogueCondition.conditionInfos.ContainsKey(selectName))
+                            if (ContentType == Enum_ExtraContentType.Condition ?
+                                EDS_DialogueCondition.conditionInfos.ContainsKey(selectName) : EDS_DialogueEvent.eventInfos.ContainsKey(selectName))
                             {
                                 _item.itemName = selectName;
                                 _item.itemName = selectName;
@@ -676,11 +692,11 @@ namespace Easiest.DialogueSystem
             };
             onAddCallback = (ReorderableList list) =>
             {
-                if (_type == typeof(EDS_DialogueHolder.DialogueCondition))
+                if (ContentType == Enum_ExtraContentType.Condition)
                 {
                     ExtraContents.Add(new EDS_DialogueHolder.DialogueCondition());
                 }
-                else if (_type == typeof(EDS_DialogueHolder.DialogueEvent))
+                else if (ContentType == Enum_ExtraContentType.Event)
                 {
                     ExtraContents.Add(new EDS_DialogueHolder.DialogueEvent());
                 }

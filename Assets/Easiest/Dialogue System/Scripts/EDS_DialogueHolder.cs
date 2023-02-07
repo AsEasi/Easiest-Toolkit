@@ -35,6 +35,8 @@ namespace Easiest.DialogueSystem
             }
             [SerializeField] private string id = "";
             public string title = "Title";
+            public bool hasContent = true;
+            public bool usePreviousActor = false;
             public string actor = "Actor";
             public DialogueContent content = new();
             public List<DialogueOutput> outputs = new();
@@ -194,7 +196,7 @@ namespace Easiest.DialogueSystem
         }
         #endregion
 
-        public List<Dialogue> dialogues;
+        public List<Dialogue> dialogues = new();
 
         public Dialogue GetDialogue(string _id)
         {

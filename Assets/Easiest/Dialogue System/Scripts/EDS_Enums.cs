@@ -24,4 +24,8 @@ namespace Easiest.DialogueSystem
     {
         Normal = 0, Unenable = 1, Used = 2
     }
+    public enum Enum_ExtraContentType
+    {
+        Condition = 0, Event = 1
+    }
 }

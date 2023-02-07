@@ -144,6 +144,15 @@ namespace Easiest.DialogueSystem
 
             return _style;
         }
+        public static GUIStyle WordWrapMultilineTextArea()
+        {
+            GUIStyle _style = new GUIStyle(EditorStyles.textArea);
+
+            _style.alignment = TextAnchor.UpperLeft;
+            _style.wordWrap = true;
+
+            return _style;
+        }
     }
     public class EDS_GUIAreaDrawer
     {
